@@ -1,49 +1,77 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import { Context } from "../store/appContext";
 
-export const Home = () => (
-	<div className="text-center mt-5">
-		<div className="row row-cols-1 row-cols-md-3 g-4">
-			<div className="col">
-				<div className="card h-100">
-					<img src={rigoImage} style={{width: '400px', height: '200px', objectFit: 'cover'}}/>
-					<div className="card-body">
-						<h5 className="card-title">Card title</h5>
-						<p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-					</div>
-					<div className="card-footer d-flex justify-content-between">
-						<a href="#" class="btn btn-outline-primary">Learn more!</a>
-						<a href="#" class="btn btn-outline-warning">♡</a>
-					</div>
-				</div>
-			</div>
-			<div className="col">
-				<div className="card h-100">
-					<img src={rigoImage} style={{width: '400px', height: '200px', objectFit: 'cover'}}/>
-					<div className="card-body">
-						<h5 className="card-title">Card title</h5>
-						<p className="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-					</div>
-					<div className="card-footer d-flex justify-content-between">
-						<a href="#" class="btn btn-outline-primary">Learn more!</a>
-						<a href="#" class="btn btn-outline-warning">♡</a>
-					</div>
-				</div>
-			</div>
-			<div className="col">
-				<div className="card h-100">
-					<img src={rigoImage} style={{width: '400px', height: '200px', objectFit: 'cover'}}/>
-					<div className="card-body">
-						<h5 className="card-title">Card title</h5>
-						<p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-					</div>
-					<div className="card-footer d-flex justify-content-between">
-						<a href="#" class="btn btn-outline-primary">Learn more!</a>
-						<a href="#" class="btn btn-outline-warning">♡</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-);
+export const Home = () => {
+  const { store, actions } = useContext(Context);
+
+  useEffect(() => {
+    actions.loadCharacters();
+    actions.loadPlanets(); // Cargar también los planetas
+  }, [actions]);
+
+  const handleFavoriteClick = (title) => {
+    if (!store.favorites.includes(title)) {
+      actions.addToFavorites(title);
+    }
+  };
+
+  const renderCharacterCard = (character, index) => (
+    <div className="card h-100" key={index}>
+      <img src={rigoImage} style={{ width: '200px', height: '200px', objectFit: 'cover' }} alt={character.name} />
+      <div className="card-body">
+        <h5 className="card-title">{character.name}</h5>
+        <p className="card-text">
+          <strong>Gender:</strong> {character.gender}<br />
+          <strong>Hair Color:</strong> {character.hair_color}<br />
+          <strong>Eye Color:</strong> {character.eye_color}
+        </p>
+      </div>
+      <div className="card-footer d-flex justify-content-between">
+        <Link to={`/character/${character.uid}`} className="btn btn-outline-primary">Learn more!</Link>
+        <button 
+          onClick={() => handleFavoriteClick(character.name)} 
+          className={`btn btn-outline-${store.favorites.includes(character.name) ? 'warning' : 'warning'}`}
+        >
+          ♡
+        </button>
+      </div>
+    </div>
+  );
+
+  const renderPlanetCard = (planet, index) => (
+    <div className="card h-100" key={index}>
+      <img src={rigoImage} style={{ width: '200px', height: '200px', objectFit: 'cover' }} alt={planet.name} />
+      <div className="card-body">
+        <h5 className="card-title">{planet.name}</h5>
+        <p className="card-text">
+          <strong>Population:</strong> {planet.population}<br />
+          <strong>Terrain:</strong> {planet.terrain}
+        </p>
+      </div>
+    </div>
+  );
+
+  const renderFirstList = () => (
+    <div className="horizontal-scroll-container">
+      {store.characters.map((character, index) => renderCharacterCard(character, index))}
+    </div>
+  );
+
+  const renderSecondList = () => (
+    <div className="horizontal-scroll-container">
+      {store.planets.map((planet, index) => renderPlanetCard(planet, index))}
+    </div>
+  );
+
+  return (
+    <div className="text-center mt-5 container">
+      {renderFirstList()}
+      <div className="mt-4">
+        {renderSecondList()}
+      </div>
+    </div>
+  );
+};
