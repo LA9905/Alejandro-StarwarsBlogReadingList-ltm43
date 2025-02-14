@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import rigoImage from "../../img/rigo-baby.jpg";
 import { Context } from "../store/appContext";
 
 export const PlanetDetail = () => {
@@ -19,6 +20,18 @@ export const PlanetDetail = () => {
 
   return (
     <div className="container my-5">
+          <div className="d-flex">
+            <img 
+              src={rigoImage} 
+              style={{ 
+                width: '200px', 
+                height: '200px', 
+                objectFit: 'cover',
+                marginRight: '20px' // Espacio entre la imagen y el texto
+              }} 
+              alt={planet.name} 
+            />
+            <div></div>
       <h1>{planet.name}</h1>
       <p><strong>Population:</strong> {planet.population}</p>
       <p><strong>Rotation Period:</strong> {planet.rotation_period} days</p>
@@ -28,5 +41,6 @@ export const PlanetDetail = () => {
       <p><strong>Gravity:</strong> {planet.gravity}</p>
       <p><strong>Terrain:</strong> {planet.terrain}</p>
     </div>
+   </div> 
   );
 };

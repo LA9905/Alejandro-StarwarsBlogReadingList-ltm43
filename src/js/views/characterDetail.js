@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import rigoImage from "../../img/rigo-baby.jpg";
 import { Context } from "../store/appContext";
 
 export const CharacterDetail = () => {
@@ -19,13 +20,27 @@ export const CharacterDetail = () => {
 
   return (
     <div className="container my-5">
-      <h1>{character.name}</h1>
-      <p><strong>Gender:</strong> {character.gender}</p>
-      <p><strong>Height:</strong> {character.height} cm</p>
-      <p><strong>Mass:</strong> {character.mass} kg</p>
-      <p><strong>Hair Color:</strong> {character.hair_color}</p>
-      <p><strong>Eye Color:</strong> {character.eye_color}</p>
-      <p><strong>Skin Color:</strong> {character.skin_color}</p>
+      <div className="d-flex">
+        <img 
+          src={rigoImage} 
+          style={{ 
+            width: '200px', 
+            height: '200px', 
+            objectFit: 'cover',
+            marginRight: '20px' // Espacio entre la imagen y el texto
+          }} 
+          alt={character.name} 
+        />
+        <div>
+          <h1>{character.name}</h1>
+          <p><strong>Gender:</strong> {character.gender}</p>
+          <p><strong>Height:</strong> {character.height} cm</p>
+          <p><strong>Mass:</strong> {character.mass} kg</p>
+          <p><strong>Hair Color:</strong> {character.hair_color}</p>
+          <p><strong>Eye Color:</strong> {character.eye_color}</p>
+          <p><strong>Skin Color:</strong> {character.skin_color}</p>
+        </div>
+      </div>
     </div>
   );
 };
