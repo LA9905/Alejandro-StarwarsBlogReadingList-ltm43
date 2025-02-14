@@ -9,8 +9,10 @@ export const Home = () => {
 
   useEffect(() => {
     actions.loadCharacters();
-    actions.loadPlanets(); // Cargar también los planetas
+    actions.loadPlanets();
   }, [actions]);
+
+  console.log(store.characters)
 
   const handleFavoriteClick = (title) => {
     if (!store.favorites.includes(title)) {
@@ -30,7 +32,7 @@ export const Home = () => {
         </p>
       </div>
       <div className="card-footer d-flex justify-content-between">
-        <Link to={`/character/${character.uid}`} className="btn btn-outline-primary">Learn more!</Link>
+        <Link to={`/character/${character.url.split("/")[5]}`} className="btn btn-outline-primary">Learn more!</Link>
         <button 
           onClick={() => handleFavoriteClick(character.name)} 
           className={`btn btn-outline-${store.favorites.includes(character.name) ? 'warning' : 'warning'}`}

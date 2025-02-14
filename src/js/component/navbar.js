@@ -7,7 +7,7 @@ export const Navbar = () => {
 
   return (
     <nav className="navbar navbar-light bg-light mb-3">
-      <div className="container-fluid d-flex justify-content-between align-items-center">
+      <div className="container d-flex justify-content-between align-items-center">
         <Link to="/" className="navbar-brand mb-0">
           <span className="d-inline-flex align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 50 50">
