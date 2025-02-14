@@ -17,6 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       characters: [], // Añadimos un array para los personajes de Star Wars
       planets: [], // Añadir un array para los planetas
       characterDetails: null,  // Nuevo estado para los detalles del personaje
+      planetDetails: null  // Para almacenar los detalles del planeta seleccionado
     },
     actions: {
       // Use getActions to call a function within a function
@@ -81,6 +82,15 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           })
           .catch(error => console.error('Error fetching planets:', error));
+      },
+
+      loadPlanetDetails: (id) => {
+        fetch(`https://www.swapi.tech/api/planets/${id}`)
+          .then(response => response.json())
+          .then(data => {
+            setStore({ planetDetails: data.result.properties });
+          })
+          .catch(error => console.error('Error fetching planet details:', error));
       },
       addToFavorites: (title) => {
         const store = getStore();

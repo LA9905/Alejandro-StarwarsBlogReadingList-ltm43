@@ -26,7 +26,6 @@ export const CharacterDetail = () => {
       <p><strong>Hair Color:</strong> {character.hair_color}</p>
       <p><strong>Eye Color:</strong> {character.eye_color}</p>
       <p><strong>Skin Color:</strong> {character.skin_color}</p>
-      <Link to="/" className="btn btn-primary mt-3">Back to Home</Link>
     </div>
   );
 };

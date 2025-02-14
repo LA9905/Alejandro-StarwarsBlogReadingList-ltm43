@@ -12,8 +12,6 @@ export const Home = () => {
     actions.loadPlanets();
   }, [actions]);
 
-  console.log(store.characters)
-
   const handleFavoriteClick = (title) => {
     if (!store.favorites.includes(title)) {
       actions.addToFavorites(title);
@@ -52,6 +50,15 @@ export const Home = () => {
           <strong>Population:</strong> {planet.population}<br />
           <strong>Terrain:</strong> {planet.terrain}
         </p>
+      <div className="card-footer d-flex justify-content-between">
+        <Link to={`/planet/${planet.url.split("/")[5]}`} className="btn btn-outline-primary">Learn more!</Link>
+        <button 
+          onClick={() => handleFavoriteClick(planet.name)} 
+          className={`btn btn-outline-${store.favorites.includes(planet.name) ? 'warning' : 'warning'}`}
+        >
+          ♡
+        </button>
+      </div>
       </div>
     </div>
   );
