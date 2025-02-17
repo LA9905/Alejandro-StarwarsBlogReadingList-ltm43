@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import rigoImage from "../../img/rigo-baby.jpg";
 import { Context } from "../store/appContext";
+import "../../styles/characters.css"; // Asegúrate de tener un archivo CSS para estilos específicos
 
 export const CharacterDetail = () => {
   const { store, actions } = useContext(Context);
@@ -27,19 +28,42 @@ export const CharacterDetail = () => {
             width: '200px', 
             height: '200px', 
             objectFit: 'cover',
-            marginRight: '20px' // Espacio entre la imagen y el texto
+            marginRight: '20px' 
           }} 
           alt={character.name} 
         />
         <div>
           <h1>{character.name}</h1>
-          <p><strong>Gender:</strong> {character.gender}</p>
-          <p><strong>Height:</strong> {character.height} cm</p>
-          <p><strong>Mass:</strong> {character.mass} kg</p>
-          <p><strong>Hair Color:</strong> {character.hair_color}</p>
-          <p><strong>Eye Color:</strong> {character.eye_color}</p>
-          <p><strong>Skin Color:</strong> {character.skin_color}</p>
+          <p>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur.
+          </p>
         </div>
+      </div>
+      <div className="mt-4">
+        <table className="table table-bordered table-character-details">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Height</th>
+              <th>Skin Color</th>
+              <th>Eye Color</th>
+              <th>Mass</th>
+              <th>Hair Color</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{character.name}</td>
+              <td>{character.gender}</td>
+              <td>{character.height} cm</td>
+              <td>{character.skin_color}</td>
+              <td>{character.eye_color}</td>
+              <td>{character.mass} kg</td>
+              <td>{character.hair_color}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );
