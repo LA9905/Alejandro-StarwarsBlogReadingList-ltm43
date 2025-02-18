@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import rigoImage from "../../img/rigo-baby.jpg";
 import { Context } from "../store/appContext";
-import "../../styles/planets.css"; // Asegúrate de tener un archivo CSS para estilos específicos
+import "../../styles/planets.css"; 
 
 export const PlanetDetail = () => {
   const { store, actions } = useContext(Context);

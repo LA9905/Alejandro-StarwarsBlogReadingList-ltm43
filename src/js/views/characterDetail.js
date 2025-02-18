@@ -2,14 +2,12 @@ import React, { useContext, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import rigoImage from "../../img/rigo-baby.jpg";
 import { Context } from "../store/appContext";
-import "../../styles/characters.css"; // Asegúrate de tener un archivo CSS para estilos específicos
-
+import "../../styles/characters.css";
 export const CharacterDetail = () => {
   const { store, actions } = useContext(Context);
   const { characterId } = useParams();
 
   useEffect(() => {
-    // Cargamos los detalles del personaje al montar el componente
     actions.loadCharacterDetails(characterId);
   }, [characterId]);
 
