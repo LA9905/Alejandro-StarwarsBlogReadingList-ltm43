@@ -13,14 +13,13 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white"
         }
       ],
-      favorites: [], // Añadimos un array para los favoritos
-      characters: [], // Añadimos un array para los personajes de Star Wars
-      planets: [], // Añadir un array para los planetas
-      characterDetails: null,  // Nuevo estado para los detalles del personaje
-      planetDetails: null  // Para almacenar los detalles del planeta seleccionado
+      favorites: [],
+      characters: [],
+      planets: [],
+      characterDetails: null,
+      planetDetails: null
     },
     actions: {
-      // Use getActions to call a function within a function
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
@@ -30,17 +29,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         */
       },
       changeColor: (index, color) => {
-        //get the store
         const store = getStore();
-  
-        //we have to loop the entire demo array to look for the respective index
-        //and change its color
         const demo = store.demo.map((elm, i) => {
           if (i === index) elm.background = color;
           return elm;
         });
-
-        //reset the global store
         setStore({ demo: demo });
       },
       loadCharacters: () => {
@@ -68,27 +61,22 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch(error => console.error('Error fetching character details:', error));
       },
       loadPlanets: () => {
-        fetch('https://www.swapi.tech/api/planets')
+        fetch('https://swapi.dev/api/planets')
           .then(response => response.json())
           .then(data => {
             if (data.results && Array.isArray(data.results)) {
-              Promise.all(data.results.slice(0, 9).map(planet => 
-                fetch(planet.url).then(res => res.json())
-              )).then(planetsDetails => {
-                setStore({ planets: planetsDetails.map(detail => detail.result.properties) });
-              });
+              setStore({ planets: data.results.slice(0, 9) });
             } else {
               console.error('Unexpected data structure from API:', data);
             }
           })
           .catch(error => console.error('Error fetching planets:', error));
       },
-
       loadPlanetDetails: (id) => {
-        fetch(`https://www.swapi.tech/api/planets/${id}`)
+        fetch(`https://swapi.dev/api/planets/${id}`)
           .then(response => response.json())
           .then(data => {
-            setStore({ planetDetails: data.result.properties });
+            setStore({ planetDetails: data });
           })
           .catch(error => console.error('Error fetching planet details:', error));
       },

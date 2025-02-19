@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import rigoImage from "../../img/rigo-baby.jpg";
 import { Context } from "../store/appContext";
 import "../../styles/characters.css";
+
 export const CharacterDetail = () => {
   const { store, actions } = useContext(Context);
   const { characterId } = useParams();

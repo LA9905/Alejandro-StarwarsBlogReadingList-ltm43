@@ -52,7 +52,7 @@ export const Home = () => {
         </p>
       </div>
       <div className="card-footer d-flex justify-content-between">
-        <Link to={`/planet/${planet.url.split("/")[5]}`} className="btn btn-outline-primary">Learn more!</Link>
+        <Link to={`/planet/${planet.url.split("/")[planet.url.split("/").length - 2]}`} className="btn btn-outline-primary">Learn more!</Link>
         <button 
           onClick={() => handleFavoriteClick(planet.name)} 
           className={`btn btn-outline-${store.favorites.includes(planet.name) ? 'warning' : 'warning'}`}
