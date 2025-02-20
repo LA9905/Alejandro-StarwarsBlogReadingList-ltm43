@@ -55,10 +55,10 @@ export const CharacterDetail = () => {
             <tr>
               <td>{character.name}</td>
               <td>{character.gender}</td>
-              <td>{character.height} cm</td>
+              <td>{character.height}</td>
               <td>{character.skin_color}</td>
               <td>{character.eye_color}</td>
-              <td>{character.mass} kg</td>
+              <td>{character.mass}</td>
               <td>{character.hair_color}</td>
             </tr>
           </tbody>

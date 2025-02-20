@@ -37,7 +37,7 @@ export const Navbar = () => {
                       actions.removeFromFavorites(fav);
                     }}
                   >
-                    <i class="fa-regular fa-trash-can"></i>
+                    <i className="fa-regular fa-trash-can"></i>
                   </span>
                 </a>
               </li>

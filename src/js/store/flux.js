@@ -37,15 +37,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ demo: demo });
       },
       loadCharacters: () => {
-        fetch('https://www.swapi.tech/api/people')
+        fetch('https://swapi.dev/api/people')
           .then(response => response.json())
           .then(data => {
             if (data.results && Array.isArray(data.results)) {
-              Promise.all(data.results.slice(0, 9).map(character => 
-                fetch(character.url).then(res => res.json())
-              )).then(charactersDetails => {
-                setStore({ characters: charactersDetails.map(detail => detail.result.properties) });
-              });
+              setStore({ characters: data.results.slice(0, 9) });
             } else {
               console.error('Unexpected data structure from API:', data);
             }
@@ -53,10 +49,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch(error => console.error('Error fetching characters:', error));
       },
       loadCharacterDetails: (id) => {
-        fetch(`https://www.swapi.tech/api/people/${id}`)
+        fetch(`https://swapi.dev/api/people/${id}`)
           .then(response => response.json())
           .then(data => {
-            setStore({ characterDetails: data.result.properties });
+            setStore({ characterDetails: data });
           })
           .catch(error => console.error('Error fetching character details:', error));
       },
